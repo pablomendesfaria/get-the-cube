@@ -48,6 +48,20 @@
                 data.trigger('click')
             })
 
+            socket.on('end-game', (command) => {
+                const playerId = socket.id
+                if (playerId !== command.playerId) {
+                    document.getElementById('result').innerHTML = "YOU LOSE"
+                    document.getElementById('result').style.color = "red"
+                    document.getElementById('winner').innerHTML = "Vencedor: " + command.playerName
+                } else {
+                    document.getElementById('result').innerHTML = "YOU WIN"
+                    document.getElementById('result').style.color = "gold"
+                    document.getElementById('winner').innerHTML = "Você venceu"
+                }
+                document.getElementById('end-game').style.visibility = "visible"
+            })
+
             socket.on('connect', () => {
                 const playerId = socket.id
                 const screen = document.getElementById('screen')
