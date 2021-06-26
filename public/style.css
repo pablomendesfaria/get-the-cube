@@ -1,23 +1,19 @@
 body {
-    margin: 40px 0 0 0;
+    margin: 20px 0 0 0;
     padding: 0;
     background-color: #EEE;
     text-align: center;
 }
 
-label {
-    display: inline-block;
+h2 {
+    margin: 0;
 }
 
 #screen {
     border: 1px solid #CCC;
     image-rendering: pixelated;
-    image-rendering: crisp-edges;
-    image-rendering: -moz-crisp-edges;
     width: 400px;
     height: 400px;
-    -webkit-box-shadow: 0px 4px 17px 0px rgba(0,0,0,0.19);
-    -moz-box-shadow: 0px 4px 17px 0px rgba(0,0,0,0.19);
     box-shadow: 0px 4px 17px 0px rgba(0,0,0,0.19);
     margin-bottom: 20px;
     margin-left: 20px;
@@ -53,7 +49,6 @@ label {
 }
 
 #nickname {
-    display: inline-block;
     margin: 5px 0 10px 0;
 }
 
@@ -136,7 +131,6 @@ label {
     text-align: right;
 }
 
-#score-table .current-player .socket-id,
-#score-table .current-player .score-value {
+#score-table .current-player {
     color: #bdaa27;
 }

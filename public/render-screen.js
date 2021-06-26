@@ -30,11 +30,11 @@ export default function renderScreen(screen, scoreTable, game, requestAnimationF
 }
 
 function updateScoreTable(scoreTable, game, currentPlayerId) {
-    const maxResults = 10
+    const maxResults = 4
 
     let scoreTableInnerHTML = `
         <tr class="header">
-            <td>Top Jogadores</td>
+            <td>Jogadores</td>
             <td>Pontos</td>
         </tr>
     `

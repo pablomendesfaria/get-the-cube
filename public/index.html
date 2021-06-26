@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
     <script src="/socket.io/socket.io.js"></script>
     <title>Multiplayer Game</title>
 </head>
@@ -92,7 +93,7 @@
                 if (game.getPlayersNumber() === 4) {
                     document.getElementById('waiting').style.visibility = 'hidden'
                 } else {
-                    document.getElementById('waiting').innerText = "Aguardando mais " + (4 - game.getPlayersNumber()) + "jogadores!"
+                    document.getElementById('waiting').innerText = "Aguardando mais " + (4 - game.getPlayersNumber()) + " jogadores!"
                 }
             })
 
