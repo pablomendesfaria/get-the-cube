@@ -70,7 +70,7 @@ function updateScoreTable(scoreTable, game, currentPlayerId) {
     scoreTableInnerHTML = topScorePlayers.reduce((stringFormed, player) => {
         return stringFormed + `
             <tr ${player.playerId === currentPlayerId ? 'class="current-player"' : ''}>
-                <td>${player.name}</td>
+                <td style="color: ${player.color}">${player.name}</td>
                 <td>${player.score}</td>
             </tr>
         `
