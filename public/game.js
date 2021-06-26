@@ -14,9 +14,10 @@ export default function createGame() {
     var interval
 
     function start() {
-        const frequency = 4000
-
-        interval = setInterval(addFruit, frequency)
+        const frequency = 2000
+        if (Object.keys(state.players).length === 4) {
+            interval = setInterval(addFruit, frequency)
+        }
     }
 
     function stop() {
@@ -35,6 +36,10 @@ export default function createGame() {
 
     function setState(newState) {
         Object.assign(state, newState)
+    }
+
+    function getPlayersNumber() {
+        return Object.keys(state.players).length
     }
 
     function addPlayer(command) {
@@ -62,8 +67,6 @@ export default function createGame() {
             playerName: playerName,
             color: color
         })
-
-        console.log(state)
     }
 
     function removePlayer(command) {
@@ -141,12 +144,18 @@ export default function createGame() {
 
         for (const fruitId in state.fruits) {
             const fruit = state.fruits[fruitId]
-            // console.log(`Checking ${playerId} score ${player.score} and ${fruitId}`)
 
             if (player.x === fruit.x && player.y === fruit.y) {
-                // console.log(`COLLISION between ${playerId} and ${fruitId}`)
                 removeFruit({ fruitId: fruitId })
                 player.score += 1
+                if (player.score === 10) {
+                    stop()
+                    notifyAll({
+                        type: 'end-game',
+                        playerId: playerId,
+                        playerName: player.name
+                    })
+                }
             }
         }
     }
@@ -160,6 +169,7 @@ export default function createGame() {
         state,
         setState,
         subscribe,
-        start
+        start,
+        getPlayersNumber
     }
 }

@@ -19,7 +19,14 @@
             <button id="enter">Enter</button>
         </div>
     </div>
+    <div id="end-game">
+        <div class="end-game-content">
+            <h1 id="result"></h1>
+            <h3 id="winner"></h3>
+        </div>
+    </div>
     <table id="score-table"></table>
+    <h2 id="waiting"></h2>
 
     <script type="module">
             import createGame from './game.js'
@@ -43,9 +50,6 @@
 
             socket.on('connect', () => {
                 const playerId = socket.id
-                // console.log(`Player connected on Client with id: ${playerId}`)
-                // console.log('socket', socket)
-
                 const screen = document.getElementById('screen')
                 const scoreTable = document.getElementById('score-table')
                 
@@ -54,7 +58,6 @@
             })
 
             socket.on('disconnect', () => {
-                console.log('Unsubscribing All')
                 keyboardListener.unsubscribeAll();
             })
 
@@ -70,17 +73,20 @@
             })
 
             socket.on('add-player', (command) => {
-                // console.log(`Receiving ${command.type} -> ${command.playerId}`)
                 game.addPlayer(command)
+
+                if (game.getPlayersNumber() === 4) {
+                    document.getElementById('waiting').style.visibility = 'hidden'
+                } else {
+                    document.getElementById('waiting').innerText = "Aguardando mais " + (4 - game.getPlayersNumber()) + "jogadores!"
+                }
             })
 
             socket.on('remove-player', (command) => {
-                // console.log(`Receiving ${command.type} -> ${command.playerId}`)
                 game.removePlayer(command)
             })
 
             socket.on('move-player', (command) => {
-                // console.log(`Receiving ${command.type} -> ${command.playerId}`)
 
                 const playerId = socket.id
 
@@ -90,12 +96,10 @@
             })
 
             socket.on('add-fruit', (command) => {
-                // console.log(`Receiving ${command.type} -> ${command.fruitId}`)
                 game.addFruit(command)
             })
 
             socket.on('remove-fruit', (command) => {
-                // console.log(`Receiving ${command.type} -> ${command.fruitId}`)
                 game.removeFruit(command)
             })
     </script>
